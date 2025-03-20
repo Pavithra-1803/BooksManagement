@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/BooksManager/CopilotIndices/17.12.31.40377/CodeChunks.db
+/bin/Debug/net9.0/runtimes/unix/lib/net6.0/Microsoft.Data.SqlClient.dll
+/obj/Debug/net9.0/compressed/0z2by1q3zx-46ein0sx1k.gz
