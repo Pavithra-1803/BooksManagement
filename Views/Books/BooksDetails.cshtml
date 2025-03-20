@@ -1,0 +1,128 @@
+﻿@using BooksManager.Models.DTOs
+@model BooksViewModel
+
+@{
+    ViewData["Title"] = "Books Details";
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+<div class="container mt-4">
+    <h2 class="mb-3 text-primary">📚 Books Details</h2>
+    <table id="booksTable" class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Publisher</th>
+                <th>Author Last Name</th>
+                <th>Author First Name</th>
+                <th>Title</th>
+                <th>Price ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model.books)
+            {
+                <tr>
+                    <td>@book.Publisher</td>
+                    <td>@book.AuthorLastName</td>
+                    <td>@book.AuthorFirstName</td>
+                    <td>@book.Title</td>
+                    <td>@book.Price.ToString("F2")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h2 class="mt-5 mb-3 text-success">📖 Books Sorted by Author & Title</h2>
+    <table id="booksAuthorTitleTable" class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Author Last Name</th>
+                <th>Author First Name</th>
+                <th>Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model.booksWithAuthorAndTitle)
+            {
+                <tr>
+                    <td>@book.AuthorLastName</td>
+                    <td>@book.AuthorFirstName</td>
+                    <td>@book.Title</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h2 class="mt-5 text-info">💰 Total Price of Books</h2>
+    <p class="lead font-weight-bold text-secondary">Total Price: $@Model.totalPrice.ToString("F2")</p>
+
+    <h2 class="mt-5 mb-3 text-warning">📑 Books from Stored Procedure</h2>
+    <table id="booksProcedureTable" class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Publisher</th>
+                <th>Author Last Name</th>
+                <th>Author First Name</th>
+                <th>Title</th>
+                <th>Price ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model.booksFromProcedure)
+            {
+                <tr>
+                    <td>@book.Publisher</td>
+                    <td>@book.AuthorLastName</td>
+                    <td>@book.AuthorFirstName</td>
+                    <td>@book.Title</td>
+                    <td>@book.Price.ToString("F2")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h2 class="mt-5 mb-3 text-danger">📕 Books Sorted by Author & Title (Stored Procedure)</h2>
+    <table id="booksProcedureSortedTable" class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Publisher</th>
+                <th>Author Last Name</th>
+                <th>Author First Name</th>
+                <th>Title</th>
+                <th>Price ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model.booksFromProcedureWithAuthorAndTitle)
+            {
+                <tr>
+                    <td>@book.Publisher</td>
+                    <td>@book.AuthorLastName</td>
+                    <td>@book.AuthorFirstName</td>
+                    <td>@book.Title</td>
+                    <td>@book.Price.ToString("F2")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('table').DataTable({
+                paging: true,
+                searching: true,
+                ordering: true,
+                info: true,
+                lengthMenu: [[5, 10, 25, -1], [5, 10, 25, "All"]],
+                pageLength: 5
+            });
+        });
+    </script>
+}
